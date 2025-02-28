@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CASE FILES - DEKOD ARCHIVE</title>
+    <style>
+        body {
+            background-color: black;
+            color: lime;
+            font-family: monospace;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+        }
+        a {
+            color: red;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        a:hover {
+            color: lime;
+            transition: 0.3s;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: black;
+            color: lime;
+            padding: 20px;
+            border: 2px solid lime;
+            width: 90%;
+            max-width: 500px;
+            text-align: left;
+            font-size: 14px;
+        }
+        .popup img {
+            width: 100%;
+        }
+        .popup .close {
+            display: block;
+            text-align: right;
+            cursor: pointer;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>CASE FILES</h1>
+    <a onclick="openCase('case1')">[ CASE #1 ]</a>
+    <a onclick="openCase('case2')">[ CASE #2 ]</a>
+    <a onclick="openCase('case3')">[ CASE #3 ]</a>
+    <a onclick="openCase('case4')">[ CASE #4 ]</a>
+    <a onclick="openCase('case5')">[ CASE #5 ]</a>
+    <a onclick="openCase('case6')">[ CASE #6 ]</a>
+    <a onclick="openCase('case7')">[ CASE #7 ]</a>
+    
+    <div id="case1" class="popup">
+        <span class="close" onclick="closeCase('case1')">[ CLOSE ]</span>
+        <h2>Victim Profile</h2>
+        <img src="victim1.jpg" alt="Victim Photo">
+        <p><strong>NAME:</strong> John Doe</p>
+        <p><strong>AGE:</strong> 22</p>
+        <p><strong>SEX:</strong> Male</p>
+        <p><strong>STUDY PROGRAM:</strong> Computer Science</p>
+        <p><strong>ACTIVITIES AND CLUBS:</strong> Debate Club, Cyber Security Team</p>
+        <h3>CBE Involvement</h3>
+        <p><strong>Type of Work Hired:</strong> Data Analysis</p>
+        <p><strong>Frequency:</strong> Weekly</p>
+        <p><strong>Payment Method:</strong> Crypto</p>
+        <p><strong>Last Transaction:</strong> 12 Feb 2025</p>
+        <p><strong>Possible Conflict:</strong> Dispute over leaked data</p>
+    </div>
+    
+    <script>
+        function openCase(caseId) {
+            document.getElementById(caseId).style.display = 'block';
+        }
+        function closeCase(caseId) {
+            document.getElementById(caseId).style.display = 'none';
+        }
+    </script>
+</body>
+</html>
