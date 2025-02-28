@@ -1,109 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEKOD Investigation Archive</title>
-    <style>
-        body {
-            background-color: #0a0a0a;
-            color: #00ffcc;
-            font-family: 'Courier New', Courier, monospace;
-            text-align: center;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-        }
-        a {
-            color: #ff4444;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>DEKOD ARCHIVE</h1>
-        <p>"This case is not a coincidence. Something is being hidden. Solve the mystery before it's too late."</p>
-        
-        <h3><a href="#" onclick="showPage('clues')">[ CLUES ]</a></h3>
-        <h3><a href="#" onclick="showPage('cctv')">[ CCTV FOOTAGE ]</a></h3>
-        <h3><a href="#" onclick="showPage('casefiles')">[ CASE FILES ]</a></h3>
-        <h3><a href="#" onclick="showPage('messages')">[ SECRET MESSAGES ]</a></h3>
-        
-        <div id="clues" class="hidden">
-            <h2>Collected Clues</h2>
-            <ul>
-                <li>Red painting on the university wall.</li>
-                <li>Secret file dated <span id="unlockDate">[Locked]</span></li>
-                <li>Mysterious voice recording (awaiting release).</li>
-            </ul>
-        </div>
+import React, { useState, useEffect } from "react";
+import "./Homepage.css";
 
-        <div id="cctv" class="hidden">
-            <h2>CCTV Footage</h2>
-            <p>This footage has been altered. Someone is trying to hide something.</p>
-            <video width="400" controls>
-                <source src="cctv_glitch.mp4" type="video/mp4">
-                Video cannot be played.
-            </video>
-        </div>
+const Homepage = () => {
+  const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-        <div id="casefiles" class="hidden">
-            <h2>Case Files</h2>
-            <p>Download the full investigation report:</p>
-            <a href="case_files.pdf" download>[ Download File ]</a>
-        </div>
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 2000); // Simulate loading effect
+  }, []);
 
-        <div id="messages" class="hidden">
-            <h2>Secret Messages</h2>
-            <p>Someone has sent a message through this system. Are you brave enough to read it?</p>
-            <a href="#" onclick="revealMessage()">[ Read Message ]</a>
-            <p id="hiddenMessage" class="hidden">"I am always watching. Trust no one."</p>
-        </div>
+  const handleLogin = () => {
+    const audio = new Audio("/assets/login-sound.mp3"); // Add login sound effect
+    audio.play();
+    setTimeout(() => setIsLoggedIn(true), 1000); // Delay entry for effect
+  };
+
+  if (loading) {
+    return <div className="loading-screen">LOADING...</div>;
+  }
+
+  if (!isLoggedIn) {
+    return (
+      <div className="login-container">
+        <h1 className="title">SECRET AGENCY ACCESS</h1>
+        <input type="password" placeholder="Enter Passcode" className="input-box" />
+        <button onClick={handleLogin} className="login-button">LOG IN</button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="homepage-container">
+      <h1 className="header">DEKOD ARCHIVE</h1>
+      <p className="subtext">Restricted Access Only</p>
+      <div className="content">
+        <p>Welcome, Agent. Select a case to proceed.</p>
+      </div>
     </div>
-    
-    <script>
-        function showPage(pageId) {
-            document.querySelectorAll('.hidden').forEach(el => el.style.display = 'none');
-            document.getElementById(pageId).style.display = 'block';
-        }
-        function revealMessage() {
-            document.getElementById('hiddenMessage').style.display = 'block';
-        }
-    </script>
-    /* CCTV Styling */
-.cctv-screen {
-    width: 80%;
-    max-width: 800px;
-    margin: 20px auto;
-    border: 5px solid white;
-    position: relative;
-    background: black;
-}
-video {
-    width: 100%;
-    display: block;
-}
-.timestamp {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    color: white;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 5px;
-    font-family: monospace;
-}
+  );
+};
 
-/* Hidden Message Styling */
-.hidden {
-    display: none;
-}
-</body>
-</html>
+export default Homepage;
